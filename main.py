@@ -1,5 +1,6 @@
 import datetime
 import pandas
+import argparse
 from math import isnan
 from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -27,15 +28,22 @@ def get_all_wine_info(path_xlsx_file):
     for category in all_wine_info:
         for characteristic in category:
             if type(category[characteristic]) == float and isnan(category[characteristic]):
-                category[characteristic] = "" 
+                category[characteristic] = '' 
         categories_wine[category['Категория']].append(category)
     
     return categories_wine 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     current_year = datetime.datetime.now().year
     winery_age = current_year - 1920
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--path', 
+                        type=str,
+                        default='wine3.xlsx', 
+                        help='Путь до таблицы с данными')
+    args = parser.parse_args()
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -43,13 +51,13 @@ if __name__ == "__main__":
     )
 
     template = env.get_template('template.html')
-    wine_categories = get_all_wine_info('wine3.xlsx')
+    wine_categories = get_all_wine_info(args.path)
     rendered_page = template.render(
         categories_wine=wine_categories,
         winery_age=get_declination_year(winery_age)
     )
 
-    with open('index.html', 'w', encoding="utf8") as file:
+    with open('index.html', 'w', encoding='utf8') as file:
         file.write(rendered_page)
 
     server = HTTPServer(('127.0.0.1', 8000), SimpleHTTPRequestHandler)
