@@ -7,16 +7,16 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 
-def get_declination_year(age, for_1, for_2, for_other):
+def get_declination_year(age):
     residue = age % 10
 
     if residue == 1 and age % 100 != 11:
-        return f'{age} {for_1}'
+        return f'{age} год'
 
     if residue in [2, 3, 4] and not (age % 100 in [12, 13, 14]):
-        return f'{age} {for_2}'
+        return f'{age} года'
 
-    return f'{age} {for_other}'
+    return f'{age} лет'
 
 
 def get_all_wine_info(path_xlsx_file):
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     wine_categories = get_all_wine_info('wine3.xlsx')
     rendered_page = template.render(
         categories_wine=wine_categories,
-        winery_age=get_declination_year(winery_age, "год", "года", "лет")
+        winery_age=get_declination_year(winery_age)
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
