@@ -1,7 +1,9 @@
 import datetime
 import pandas
 import argparse
+import os
 from math import isnan
+from dotenv import load_dotenv
 from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -35,13 +37,15 @@ def get_all_wine_info(path_xlsx_file):
 
 
 if __name__ == '__main__':
+    load_dotenv()
+    path_to_file = os.environ['PATH_TO_FILE']
     current_year = datetime.datetime.now().year
     winery_age = current_year - 1920
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--path', 
                         type=str,
-                        default='wine3.xlsx', 
+                        default=path_to_file, 
                         help='Путь до таблицы с данными')
     args = parser.parse_args()
 
