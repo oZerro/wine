@@ -43,9 +43,9 @@ if __name__ == "__main__":
     )
 
     template = env.get_template('template.html')
-    categories_wine = get_all_wine_info('wine3.xlsx')
+    wine_categories = get_all_wine_info('wine3.xlsx')
     rendered_page = template.render(
-        categories_wine=categories_wine,
+        categories_wine=wine_categories,
         winery_age=get_declination_year(winery_age, "год", "года", "лет")
     )
 
