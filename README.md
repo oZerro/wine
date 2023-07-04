@@ -6,27 +6,42 @@
 Python 3 уже должен быть установлен
     
 1. Клонируйте репозиторий с github - для этого выполните в консоли:  
-`git clone https://github.com/oZerro/wine.git`
+```
+git clone https://github.com/oZerro/wine.git
+```
 
 2. Создайте виртуальное окружение.  
 Для создания виртуального окружения:  
 - Перейдите в директорию своего проекта.  
-`cd wine` 
+```
+cd wine
+``` 
 - Выполните:  
-`python -m venv venv`
+```
+python -m venv venv
+```
 
 3. Активируйте виртуальное окружение.  
 Для активации виртуального окружения выполните:  
-- `venv\Scripts\activate.bat` - для Windows;
-- `source venv/bin/activate` - для Linux и MacOS.
-
+- для Windows  
+ ```
+venv\Scripts\activate.bat
+```   
+- для Linux и MacOS
+```
+source venv/bin/activate
+``` 
 4. Установите зависимости:  
- `pip install -r requirements.txt`  
+```
+pip install -r requirements.txt
+```  
 
 
 ## Как запустить
 Для запуска - из дериктории проекта выполните команду в консоли:  
-`python main.py`    
+```
+python main.py
+```    
 Перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## Цели проекта
