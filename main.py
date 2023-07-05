@@ -22,7 +22,7 @@ def get_declination_year(age):
     return f'{age} лет'
 
 
-def get_all_wine_info(path_xlsx_file):
+def get_all_wine(path_xlsx_file):
     excel_data_df = pandas.read_excel(f'{path_xlsx_file}')
     all_wine_info = excel_data_df.to_dict(orient='records')
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     )
 
     template = env.get_template('template.html')
-    wine_categories = get_all_wine_info(args.path)
+    wine_categories = get_all_wine(args.path)
     rendered_page = template.render(
         categories_wine=wine_categories,
         winery_age=get_declination_year(winery_age)
